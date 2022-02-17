@@ -1,7 +1,10 @@
 const mosca = require('mosca');
 
+
+const PORT = process.env.PORT || 4000
+
 const settings = {
-    port: 1234,
+    port: PORT ,
 }
 
 const broker = new mosca.Server(settings);
