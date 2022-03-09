@@ -1,5 +1,5 @@
 const mqtt = require('mqtt');
-const client = mqtt.connect('mqtt://localhost:1234');
+const client = mqtt.connect('http://broker.mqttdashboard.com:8000');
 
 client.on('connect', () => { 
 
@@ -15,7 +15,7 @@ client.on('connect', () => {
     setInterval(() => {
 
         count++;
-
-        client.publish('p', 'part 10 second')
-    }, 10000);
+        console.log("publisher")
+        client.publish('chon/temperature', '30')
+    }, 1000);
 })
