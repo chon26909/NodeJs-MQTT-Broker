@@ -1,15 +1,13 @@
 const mosca = require('mosca');
-const PORT = process.env.PORT || 4000
 
-const settings = {
-    port: PORT,
-}
+const PORT = process.env.PORT || 4000
+const settings = { port: PORT }
 
 const broker = new mosca.Server(settings);
 
 broker.on('ready', () => {
     console.log('Server is ready!');
-    broker.authenticate = authenticate;
+    // broker.authenticate = authenticate;
 })
 
 const authenticate = (client, username, password, callback) => { 
@@ -19,8 +17,8 @@ const authenticate = (client, username, password, callback) => {
 }
  
 broker.on('published', (packet) => { 
-    // console.log(packet);
-    console.log('topic : ', String(packet.topic))
-    console.log('message : ', String(packet.payload))
-    console.log(' ')
+    console.log(packet);
+    // console.log('topic : ', String(packet.topic))
+    // console.log('message : ', String(packet.payload))
+    // console.log(' ')
 })
