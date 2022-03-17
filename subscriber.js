@@ -1,19 +1,31 @@
 const mqtt = require('mqtt');
 
-const client = mqtt.connect('http://192.168.1.150:4000');
+const options = {
+    clientId: "NodeJSClient",
+    username: "chon",
+    password: "1234",
+};
+const client = mqtt.connect('http://192.168.1.150:4000',options);
 
-client.on('message', (topic, message) => { 
+client.on('message', (topic, message) => {
+    console.log("word")
+    if (topic === 'camera/picture') {
 
-    // console.log(String(topic), String(message))
+        console.log(message);
 
-    if (topic === 'room/light1') console.log('light 1 ') 
-    else if (topic === 'room/light2') console.log('light 2 ') 
-    else if (topic === 'room/light3') console.log('light 3 ') 
+        // let imgData = new Blob(binary.buffer, { type: 'application/octet-binary' });
+        // let link = URL.createObjectURL(imgData);
+        
+        // let img = new Image();
+        // img.onload = () => URL.revokeObjectURL(link);
+        // img.src = link;
+        // console.log(Buffer.from(message).toString('base64'));
+
+    }
 
 })
 
-client.on('connect', () => { 
-    client.subscribe('room/light1')
-    client.subscribe('room/light2')
-    client.subscribe('room/light3')
+client.on('connect', () => {
+    client.subscribe('camera/picture')
+
 })
